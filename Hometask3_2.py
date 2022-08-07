@@ -36,31 +36,22 @@ persons = int(input('Введите число гостей: '))
 #         print(f'{j[0]}, {j[1] * persons}{j[2]}')
 
 class Dish:
-    def __init__(self) -> None:
-        self.name = ''
-        self.ingredients = []
-        self.quantity = []
-        self.unit = []
+    def __init__(self, name, ingredients, quantity, unit):
+        self.name = name
+        self.ingredients = ingredients
+        self.quantity = quantity
+        self.unit = unit
     def how_much_to_buy(self, quantity):
         print(f'{self.name}:')
         for i, ingredient in enumerate(self.ingredients):
             print(f'{ingredient}, {self.quantity[i] * persons}{self.unit[i]}')
         print()
-salat = Dish()
-salat.name = 'Салат'
-salat.ingredients = ['картофель', 'морковь', 'огурцы', 'горошек', 'майонез']
-salat.quantity = [100, 50, 50, 30, 70]
-salat.unit = ['гр.', 'гр.', 'гр.', 'гр.', 'мл.']
-pizza = Dish()
-pizza.name = 'Пицца'
-pizza.ingredients = ['сыр', 'томаты', 'тесто', 'бекон', 'колбаса', 'грибы']
-pizza.quantity = [50, 50, 100, 30, 30, 20]
-pizza.unit = ['гр.', 'гр.', 'гр.', 'гр.', 'гр.', 'гр.']
-fruit_dessert = Dish()
-fruit_dessert.name = 'Фруктовый десерт'
-fruit_dessert.ingredients = ['хурма','киви','творог','сахар','мед']
-fruit_dessert.quantity = [60, 60, 60, 10, 50]
-fruit_dessert.unit = ['гр.', 'гр.', 'гр.', 'гр.', 'мл.']
+salat = Dish('Салат', ['картофель', 'морковь', 'огурцы', 'горошек', 'майонез'], 
+            [100, 50, 50, 30, 70], ['гр.', 'гр.', 'гр.', 'гр.', 'мл.'])
+pizza = Dish('Пицца', ['сыр', 'томаты', 'тесто', 'бекон', 'колбаса', 'грибы'], 
+            [50, 50, 100, 30, 30, 20], ['гр.', 'гр.', 'гр.', 'гр.', 'гр.', 'гр.'])
+fruit_dessert = Dish('Фруктовый десерт', ['хурма','киви','творог','сахар','мед'],  
+                    [60, 60, 60, 10, 50], ['гр.', 'гр.', 'гр.', 'гр.', 'мл.'])
 salat.how_much_to_buy(persons)
 pizza.how_much_to_buy(persons)
 fruit_dessert.how_much_to_buy(persons)
