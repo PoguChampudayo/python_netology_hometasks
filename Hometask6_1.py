@@ -14,12 +14,12 @@ class Student:
             course in lecturer.lecture_grades):
             lecturer.lecture_grades[course].append(grade)
             
-    def find_mean(self, grades):
+    def find_mean(self):
         _sum = 0
         length = 0
-        for course in grades:
-            _sum += sum(grades[course])
-            length += len(grades[course])
+        for course in self.grades:
+            _sum += sum(self.grades[course])
+            length += len(self.grades[course])
         if length == 0: return 0
         return _sum / length
     
@@ -27,7 +27,7 @@ class Student:
         result = (f'''
 Имя: {self.name}
 Фамилия: {self.surname}
-Средняя оценка за домашние задания: {self.find_mean(self.grades)}
+Средняя оценка за домашние задания: {self.find_mean()}
 Курсы в процессе обучения: {', '.join(self.courses_in_progress)}
 Завершенные курсы: {', '.join(self.finished_courses)}
 ''')
@@ -37,7 +37,7 @@ class Student:
         if not isinstance(other, Student):
             print("Вы сравниваете студента с кем-то другим")
             return
-        return self.find_mean(self.grades) < other.find_mean(other.grades)
+        return self.find_mean() < other.find_mean()
         
 class Mentor:
     
@@ -55,26 +55,26 @@ class Lecturer(Mentor):
         
     def add_lecture(self, course):
         self.lecture_grades[course] = []
-    def find_mean(self, lecture_grades):
+    def find_mean(self):
         _sum = 0
         length = 0
-        for course in lecture_grades:
-            _sum += sum(lecture_grades[course])
-            length += len(lecture_grades[course])
+        for course in self.lecture_grades:
+            _sum += sum(self.lecture_grades[course])
+            length += len(self.lecture_grades[course])
         if length == 0: return 0
         return _sum / length 
     def __str__(self) -> str:
         result = (f'''
 Имя: {self.name}
 Фамилия: {self.surname}
-Средняя оценка за лекции: {self.find_mean(self.lecture_grades)}''')
+Средняя оценка за лекции: {self.find_mean()}''')
         return result
     def __lt__(self, other):
         if not isinstance(other, Lecturer):
             print("Вы сравниваете лектора с кем-то другим")
             return
-        return (self.find_mean(self.lecture_grades) < 
-                other.find_mean(other.lecture_grades))
+        return (self.find_mean() < 
+                other.find_mean())
     
 
 class Reviewer(Mentor):
@@ -136,7 +136,7 @@ def calculate_mean_hw(students, course):
     for student in students:
         for grade in student.grades:
             if grade == course:
-                summary += student.find_mean(student.grades)
+                summary += student.find_mean()
                 length += 1
     return summary / length
 print(calculate_mean_hw([best_student, not_the_best_student], 'Python'))
@@ -147,7 +147,7 @@ def calculate_mean_lectures(lecturers, course):
     for lecturer in lecturers:
         for grade in lecturer.lecture_grades:
             if grade == course:
-                summary += lecturer.find_mean(lecturer.lecture_grades)
+                summary += lecturer.find_mean()
                 length += 1
     return summary / length
 print(calculate_mean_lectures([awesome_lecturer, ultra_lecturer], 'Python')) 
