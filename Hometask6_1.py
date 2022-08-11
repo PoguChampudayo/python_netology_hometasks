@@ -20,6 +20,7 @@ class Student:
         for course in grades:
             _sum += sum(grades[course])
             length += len(grades[course])
+        if length == 0: return 0
         return _sum / length
     
     def __str__(self) -> str:
@@ -54,13 +55,13 @@ class Lecturer(Mentor):
         
     def add_lecture(self, course):
         self.lecture_grades[course] = []
-#todo: добавить проерку деления на 0
     def find_mean(self, lecture_grades):
         _sum = 0
         length = 0
         for course in lecture_grades:
             _sum += sum(lecture_grades[course])
             length += len(lecture_grades[course])
+        if length == 0: return 0
         return _sum / length 
     def __str__(self) -> str:
         result = (f'''
